@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript">
+			
+           
+			function submitenter(myfield,e)
+			{
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+		
+				if (keycode == 39)
+			   {
+				   myfield.form.submit();
+				   return false;
+			   }
+				else
+			   return true;
+			}
+
+			
+</script>
+        
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>VDC SASA</title>
+
+<style type="text/css">
+#apDiv1 {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:344px;
+	height:458px;
+	z-index:1;
+	background-color: #333333;
+	cursor: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.Datum {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 33px;
+	color: #FFF;
+	left: 10px;
+	position: absolute;
+	top: 140px;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	
+}
+.Ura {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 88px;
+	color: #FFF;
+	left: 10px;
+	position: absolute;
+	top: 180px;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.Ikonce {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 10px;
+	color: #FFF;
+	left: 10px;
+	position: absolute;
+	bottom: 12px;
+	width:324px;
+	text-align: center;
+	cursor: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+#apDiv2 {
+	position:absolute;
+	left:0px;
+	top:472px;
+	width:345px;
+	height:193px;
+	z-index:2;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+input
+{
+color: #333333;
+background: #333333;
+border: none;
+cursor: none;
+}
+</style>
+</head>
+
+<body onload=" document.forma.ajdi.focus(); setInterval('updateClock()', 200);get_date();">
+
+<div id="apDiv1">
+  <div class="Datum" id="datum">...</div>
+  <div class="Ura" id="clock"></div>
+  <div class="Ikonce">
+<a href="action.php?ts=123332&amp;action=odhod"><img src="exit.png" width="64" height="64" border="0"  /></a> </div>
+  <div><form action="action.php" method="get" enctype="application/x-www-form-urlencoded" name="forma"> <input name="ajdi" type="text" size="1" onKeyPress="return submitenter(this,event)" />
+  <input type="hidden" name="action" value="prihod" />
+  </form></div>
+</div>
+</body>
+</html>

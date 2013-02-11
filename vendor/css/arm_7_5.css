@@ -1,0 +1,202 @@
+/* 
+    Document   : arm_3_5
+    Created on : 4.6.2011, 20:53:58
+    Author     : uros
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+html, body, div, span, object, h1, h2, button, label, a, img {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  /* this will work for QtWebKit in future */
+  -webkit-user-drag: none;
+}
+
+
+#navlist li, ul
+{
+	text-align: center;
+	display: inline;
+	list-style-type: none;
+	padding: 0px;
+	
+}
+
+body {
+
+     
+    background-color: #333333;
+    cursor: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+}
+
+a {
+	cursor: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+}
+
+
+#apDiv1 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:344px;
+    height:458px;
+    z-index:1;
+    /*        začasna da vidim kaj vpišem
+    background-color: #311333;
+    /*konec začasne*/
+    /*originalna barva:*/
+    	background-color: #333333;
+    cursor: none;
+}
+#apDiv1 div {
+}
+
+
+.Datum {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 33px;
+    color: #FFF;
+    left: 10px;
+    position: absolute;
+    top: 140px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.messageTOP {
+    top: 0px;
+  }
+
+.message {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 35px;
+    color: #FFF;
+    left: 10px;
+    right: 10px;
+    position: absolute;
+    top: 150px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+}
+
+.Ikonce {
+
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 10px;
+    color: #FFF;
+    left: 10px;
+    position: absolute;
+    bottom: 12px;
+    width:324px;
+    text-align: center;
+    cursor: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+#apDiv2 {
+    position:absolute;
+    left:0px;
+    top:472px;
+    width:345px;
+    height:193px;
+    z-index:2;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+}
+
+#apDiv1 {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:344px;
+    height:458px;
+    z-index:1;
+    background-color: #333333;
+    cursor: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.Ura {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 88px;
+    color: #FFF;
+    left: 10px;
+    position: absolute;
+    top: 180px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+inputhidden
+{
+    color: #55555;
+    background: #333333;
+    border: none;
+    cursor: none;
+}
+
+
+
+
+input
+{
+    
+          color: inherit;
+  background: inherit;
+  border: inherit;
+    color: #333333 !important;
+    background: #333333 !important;
+    border: none !important;
+    cursor: none !important;
+}
+
+ button
+ {
+       background: #333333;
+       border: none;
+}
