@@ -1,4 +1,4 @@
-<?
+<?php
 $titleVDC = "VDC SAŠA";
 require_once("head.php");
 require_once('designClass.php');

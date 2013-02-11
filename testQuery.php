@@ -1,5 +1,5 @@
 
-<?
+<?php
 $titleVDC = "QUERY TEST";
 
 

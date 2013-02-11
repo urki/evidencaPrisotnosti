@@ -1,4 +1,4 @@
-<?
+<?php
 $titleVDC = "Nova kartica";
 $DO_NOT_REDIRECT = "true";
 

@@ -1,5 +1,4 @@
-
-<?
+<?php
 $titleVDC = "VDC SAŠA";
 require_once("head.php");
 require_once('designClass.php');
@@ -12,14 +11,15 @@ $action = $_REQUEST["action"];
 $id = $_REQUEST["ajdi"];
 ?>
 <meta http-equiv="refresh" content="8;URL=index.php"charset=UTF-8/>
+
 </head>
 <body onload=" document.forma.ajdi.focus();">
 
     <div  id="apDiv1">
         <div class="Ikonce">
-         <ul id="navlist">
-            <?php $nekaj = $designClass->buttons_with_condition(true, array('button_private_exit', 'button_lunch_exit', 'button_work_exit', 'button_final_exit')); ?>
-             </ul>
+            <ul id="navlist">
+                <?php $nekaj = $designClass->buttons_with_condition(true, array('button_private_exit', 'button_lunch_exit', 'button_work_exit', 'button_final_exit')); ?>
+            </ul>
         </div>
         <div>
             <form autocomplete="off" border="0" action="action.php" method="get" enctype="application/x-www-form-urlencoded" name="forma">
@@ -29,7 +29,14 @@ $id = $_REQUEST["ajdi"];
                 if ($action) {
                     echo '<input type="hidden" name="action" value="' . $action . '">';
                 } else {
-                    header("location: error/message.php?msg=AKCIJE NI!!!!!!");
+                         $data = array(
+                                    'person_id' => 'neznan',
+                                    'jobtype_id' => $action,
+                                    'note' => 'ni kartice'
+                                );
+                                $db->insert('RfidRawLogError', $data);
+
+                    header("location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.");
                     $action = "prihod";
                 }
                 ?>
@@ -43,7 +50,7 @@ $id = $_REQUEST["ajdi"];
         <div class="message">
             <div align="center">
 
-                <?
+                <?php
                 if ($id and $action) {
 
                     $person = $dal->get_active_person_data_from_Rfid_by_rfid_status($id, 'active');
@@ -54,7 +61,14 @@ $id = $_REQUEST["ajdi"];
                             header("location: insert_new.php?id=$id");
                             //exit;
                         } else {
-                            header('location: error/message.php?msg=Kartica je neveljavna!');
+                                 $data = array(
+                                    'person_id' => $person[person_id],
+                                    'jobtype_id' => $action,
+                                    'note' => 'Kartice ni zaznal'
+                                );
+                                $db->insert('RfidRawLogError', $data);
+
+                            header('location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.');
                             // echo "Kartica je neveljavna!";
                             //exit;
                         }
@@ -69,8 +83,15 @@ $id = $_REQUEST["ajdi"];
                     $rezultat = $zdaj - $prej;
 
                     if ($rezultat < 8) {
-                          header('location: error/message.php?msg= Opozorilo: preteči mora vsaj 8 sec za vaš ponovni vnos');
-                      //  header('location: index.php');
+                             $data = array(
+                                    'person_id' => $person[person_id],
+                                    'jobtype_id' => $action,
+                                    'note' => '8 sekund'
+                                );
+                                $db->insert('RfidRawLogError', $data);
+
+                        header('location: error/message.php?msg= Opozorilo: preteči mora vsaj 8 sec za vaš ponovni vnos');
+                        //  header('location: index.php');
                         exit;
                     }
 
@@ -147,6 +168,13 @@ $id = $_REQUEST["ajdi"];
                                 }
                             } else {
                                 $insertAlow = FALSE;
+                                     $data = array(
+                                    'person_id' => $person[person_id],
+                                    'jobtype_id' => $action,
+                                    'note' => 'Za odhodom ne more biti spet odhod'
+                                );
+                                $db->insert('RfidRawLogError', $data);
+
                                 header('location: error/message.php?msg=Opozorilo:   Za PRIHODOM ne more biti zopet ' . $action . '!');
                                 // exit;
                             }
@@ -158,6 +186,13 @@ $id = $_REQUEST["ajdi"];
                                 $logJobTypeStart = TRUE;
                             } else {
                                 $insertAlow = FALSE;
+                                $data = array(
+                                    'person_id' => $person[person_id],
+                                    'jobtype_id' => $action,
+                                    'note' => 'Za odhodom ne more biti spet odhod'
+                                );
+                                $db->insert('RfidRawLogError', $data);
+
                                 header('location: error/message.php?msg=Opozorilo:   Za odhodom - ' . $SameAction[action] . ' mora biti naprej prihod!');
                                 // exit;
                             }
@@ -171,21 +206,21 @@ $id = $_REQUEST["ajdi"];
                             'person_id' => $person[person_id], //name_drop sem zamenjal z user_id saj se avtomatsko...
                             'action' => $action
                         );
-                            
-                         
-                         
+
+
+
 
                         $db->insert('RfidRawLog', $data);
 //Get person first and last name
                         if ($logJobTypeStart == TRUE) {
-                           
-                           
-                           
-                 
-                           
+
+
+
+
+
                             //$end = 0;
                             $start = $zdaj;
-                            $end=$zdaj+(3600*10);
+                            $end = $zdaj + (3600 * 10);
                             $data = array(
                                 'person_id' => $person[person_id],
                                 'jobtype_id' => $logJobTypeId,
@@ -194,36 +229,34 @@ $id = $_REQUEST["ajdi"];
                                 'note' => 'prihod zapisal fa99'
                             );
                             $db->insert('log', $data);
-                           header("location: error/message.php?msg=$person[first] $person[last] -> $action");
+                            header("location: error/message.php?msg=$person[first] $person[last] -> $action");
                         } else {
                             $end = $zdaj;
-                          //  $najdistevilko=$dal->get_data_from_log_by_job_and_person_and_modified($logJobTypeId	,$person[person_id],"='rfid(start)'");
-                           $najdistevilko=$dal->get_data_from_log_by_job_and_person_and_modified($logJobTypeId	,$person[person_id],"='prihod zapisal fa99'");//,'rfid(start)');
-
+                            //  $najdistevilko=$dal->get_data_from_log_by_job_and_person_and_modified($logJobTypeId	,$person[person_id],"='rfid(start)'");
+                            $najdistevilko = $dal->get_data_from_log_by_job_and_person_and_modified($logJobTypeId, $person[person_id], "='prihod zapisal fa99'"); //,'rfid(start)');
                             // $najdistevilko=$dal->get_data_from_log_by_job_and_person_and_modified($logJobTypeId,$person[person_id]);//,"='|prihod zapisal fa99|'");//,'rfid(start)');
 
 
-                            $zapis=$najdistevilko[0];
-                            $modified_by=$zapis[note];
-                            $zapisst=$zapis[log_id]; 
-                         //   header("location: error/message.php?msg=
-                                //    ELSEd:$zapisst  in modified_by:$modified_by;");
-                           //exit;
+                            $zapis = $najdistevilko[0];
+                            $modified_by = $zapis[note];
+                            $zapisst = $zapis[log_id];
+                            //   header("location: error/message.php?msg=
+                            //    ELSEd:$zapisst  in modified_by:$modified_by;");
+                            //exit;
                             $db->query("update log set end=$zdaj, note=(concat('$zapis[note]','; odhod_zapisal_fa99')) where log_id=$zapisst");
 
                             //$db->query("update log set end=$zdaj where log_id=$zapisst");
                             //$db->query("update log set end=$zdaj where person_id=$person[person_id] and jobtype_id=$logJobTypeId and modified_by='rfid' order by log_id DESC limit 1");
-
-
-
-                            }
+                        }
 
                         header("location: error/message.php?msg=$person[first] $person[last] -> $action");
                     }
                 }
 
                 if ($action and !$id) {
+
                     echo "Pristavi kartico ($action)";
+
                     //  header("location: error/message.php?msg=dogodek -$action za </br>$person[first] $person[last] vpisan");
                 }
                 if (!$action and !$id) {
