@@ -12,16 +12,15 @@
  */
 class designClass {
 
-    public $sizeX = '76';
-    public $sizeY = '86';
+    public $sizeX = '141';
+    public $sizeY = '146';
 
     public function draw_link_button_with_action($action, $image) {
         require_once('config.php');
-        //Isce pa isce pa isce prvi button - coffee - seveda na napcnem mesu - ZAKAJ?
-       // $image = "$imagePath$image";
+        //$image = "$imagePath$image";
         $sizeX = $this->sizeX;
         $sizeY = $this->sizeY;
-        echo "<li><a href='action.php?ts=123332&amp;action=$action'><img src='$image' width='$sizeX'  height='$sizeY' border='0'  /></a></li>";
+        echo "<li><a href='action.php?ts=123332&amp;action=$action'><img src='$image' width='$sizeX' height='$sizeY' border='0'  /></a></li>";
     }
 
     public function button_entry() {

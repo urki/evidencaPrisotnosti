@@ -9,7 +9,7 @@
     <head>
 
         <link rel="stylesheet" href="vendor/css/screen.css" type="text/css" media="screen, projection"/>
-        <link rel="stylesheet" href="vendor/css/arm_3_5.css" type="text/css" media="screen, projection"/>
+        <link rel="stylesheet" href="vendor/css/arm_7_5.css" type="text/css" media="screen, projection"/>
         <!--[if lt IE 8]>
           <link rel="stylesheet" href="vendor/css/blueprint/ie.css" type="text/css" media="screen, projection">
         <![endif]-->

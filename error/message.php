@@ -7,7 +7,7 @@ $msg=$_REQUEST["msg"];
 ?>
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
-        <link rel="stylesheet" href="../vendor/css/arm_3_5.css" type="text/css" media="screen, projection"/>
+        <link rel="stylesheet" href="../vendor/css/arm_7_5.css" type="text/css" media="screen, projection"/>
         <head>
             <meta http-equiv="refresh" content="1;URL=../index.php"></meta>
             <title>Obvestilo</title>
