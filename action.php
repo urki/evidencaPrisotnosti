@@ -29,12 +29,16 @@ $id = $_REQUEST["ajdi"];
                 if ($action) {
                     echo '<input type="hidden" name="action" value="' . $action . '">';
                 } else {
-                         $data = array(
-                                    'person_id' => 'neznan',
-                                    'jobtype_id' => $action,
-                                    'note' => 'ni kartice'
-                                );
-                                $db->insert('RfidRawLogError', $data);
+                    if (!$id) {
+                        $id = 'neznan';
+                    }
+                    $data = array(
+                        'person_id' => 'neznan',
+                        'rfid' => $id,
+                        'jobtype_id' => 'prihod',
+                        'note' => 'ni kartice'
+                    );
+                    $db->insert('RfidRawLogError', $data);
 
                     header("location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.");
                     $action = "prihod";
@@ -44,7 +48,7 @@ $id = $_REQUEST["ajdi"];
         </div>
         <div>
             <div class="span-3">
-                <?php $nekaj = $designClass->buttons_with_condition(true, array('button_cancel_main')); ?>
+<?php $nekaj = $designClass->buttons_with_condition(true, array('button_cancel_main')); ?>
             </div>
         </div>
         <div class="message">
@@ -61,12 +65,13 @@ $id = $_REQUEST["ajdi"];
                             header("location: insert_new.php?id=$id");
                             //exit;
                         } else {
-                                 $data = array(
-                                    'person_id' => $person[person_id],
-                                    'jobtype_id' => $action,
-                                    'note' => 'Kartice ni zaznal'
-                                );
-                                $db->insert('RfidRawLogError', $data);
+                            $data = array(
+                                'person_id' => $person[person_id],
+                                'rfid' => $id,
+                                'jobtype_id' => $action,
+                                'note' => 'Kartice ni zaznal'
+                            );
+                            $db->insert('RfidRawLogError', $data);
 
                             header('location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.');
                             // echo "Kartica je neveljavna!";
@@ -83,12 +88,13 @@ $id = $_REQUEST["ajdi"];
                     $rezultat = $zdaj - $prej;
 
                     if ($rezultat < 8) {
-                             $data = array(
-                                    'person_id' => $person[person_id],
-                                    'jobtype_id' => $action,
-                                    'note' => '8 sekund'
-                                );
-                                $db->insert('RfidRawLogError', $data);
+                        $data = array(
+                            'person_id' => $person[person_id],
+                            'rfid' => $id,
+                            'jobtype_id' => $action,
+                            'note' => '8 sekund'
+                        );
+                        $db->insert('RfidRawLogError', $data);
 
                         header('location: error/message.php?msg= Opozorilo: preteči mora vsaj 8 sec za vaš ponovni vnos');
                         //  header('location: index.php');
@@ -168,8 +174,9 @@ $id = $_REQUEST["ajdi"];
                                 }
                             } else {
                                 $insertAlow = FALSE;
-                                     $data = array(
+                                $data = array(
                                     'person_id' => $person[person_id],
+                                    'rfid' => $id,
                                     'jobtype_id' => $action,
                                     'note' => 'Za odhodom ne more biti spet odhod'
                                 );
@@ -188,6 +195,7 @@ $id = $_REQUEST["ajdi"];
                                 $insertAlow = FALSE;
                                 $data = array(
                                     'person_id' => $person[person_id],
+                                    'rfid' => $id,
                                     'jobtype_id' => $action,
                                     'note' => 'Za odhodom ne more biti spet odhod'
                                 );
