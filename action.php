@@ -30,19 +30,17 @@ $id = $_REQUEST["ajdi"];
                     echo '<input type="hidden" name="action" value="' . $action . '">';
                 } else {
                     if (!$id) {
-                        $id = 'neznan';
-                        
-                          $data = array(
-                        'person_id' => 'neznan',
-                        'rfid' => $id,
-                        'jobtype_id' => 'prihod',
-                        'note' => 'neznana kartica'
-                    );
-                    $db->insert('RfidRawLogError', $data);
+                        $data = array(
+                            'person_id' => 'neznan',
+                            'rfid' => 'no rfid',
+                            'jobtype_id' => 'prihod',
+                            'note' => 'ni zaznal kartice'
+                        );
+                        $db->insert('RfidRawLogError', $data);
 
-                    header("location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.");
+                        header("location: error/message.php?msg=Kartica ne dela.");
                     }
-                  
+
                     $action = "prihod";
                 }
                 ?>
@@ -50,7 +48,7 @@ $id = $_REQUEST["ajdi"];
         </div>
         <div>
             <div class="span-3">
-<?php $nekaj = $designClass->buttons_with_condition(true, array('button_cancel_main')); ?>
+                <?php $nekaj = $designClass->buttons_with_condition(true, array('button_cancel_main')); ?>
             </div>
         </div>
         <div class="message">
@@ -68,14 +66,14 @@ $id = $_REQUEST["ajdi"];
                             //exit;
                         } else {
                             $data = array(
-                                'person_id' => $person[person_id],
+                                'person_id' => 'neznan',
                                 'rfid' => $id,
                                 'jobtype_id' => $action,
-                                'note' => 'Kartice ni zaznal'
+                                'note' => 'Kartice ne pozna'
                             );
                             $db->insert('RfidRawLogError', $data);
 
-                            header('location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.');
+                            header('location: error/message.php?msg=Še enkrat poskusiva saj kartice NE PREPOZNAM.');
                             // echo "Kartica je neveljavna!";
                             //exit;
                         }
@@ -217,17 +215,9 @@ $id = $_REQUEST["ajdi"];
                             'action' => $action
                         );
 
-
-
-
                         $db->insert('RfidRawLog', $data);
 //Get person first and last name
                         if ($logJobTypeStart == TRUE) {
-
-
-
-
-
                             //$end = 0;
                             $start = $zdaj;
                             $end = $zdaj + (3600 * 10);
