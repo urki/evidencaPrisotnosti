@@ -31,16 +31,18 @@ $id = $_REQUEST["ajdi"];
                 } else {
                     if (!$id) {
                         $id = 'neznan';
-                    }
-                    $data = array(
+                        
+                          $data = array(
                         'person_id' => 'neznan',
                         'rfid' => $id,
                         'jobtype_id' => 'prihod',
-                        'note' => 'ni kartice'
+                        'note' => 'neznana kartica'
                     );
                     $db->insert('RfidRawLogError', $data);
 
                     header("location: error/message.php?msg=Še enkrat poskusiva saj kartice NE ZAZNAM.");
+                    }
+                  
                     $action = "prihod";
                 }
                 ?>
